@@ -68,14 +68,12 @@ app.put("/repositories/:id", checkIdExists ,(request, response) => {
 
   const repository = getRepositoryById(id);
 
-  const repositoryFound = repository.object;
-
-    const repositoryUpdate = {
-      id: repositoryFound.id,
+  const repositoryUpdate = {
+      id: repository.object.id,
       title: title,
       url: url,
       techs: techs,
-      likes: repositoryFound.likes,
+      likes: repository.object.likes,
     }
 
     updateRepository(repositoryUpdate,repository.index);
@@ -100,14 +98,12 @@ app.post("/repositories/:id/like", checkIdExists, (request, response) => {
 
   const repository = getRepositoryById(id);
 
-  const repositoryFound = repository.object;
-
   const repositoryUpdate = {
-      id: repositoryFound.id,
-      title: repositoryFound.title,
-      url: repositoryFound.url,
-      techs: repositoryFound.techs,
-      likes: repositoryFound.likes+1,
+      id: repository.object.id,
+      title: repository.object.title,
+      url: repository.object.url,
+      techs: repository.object.techs,
+      likes: repository.object.likes+1,
   }
 
   updateRepository(repositoryUpdate,repository.index);
